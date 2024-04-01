@@ -28,7 +28,7 @@
   }
 }
 
- button.btn {
+button.btn {
   color: #ffffff;
   background: #000000;
   border: 1px solid #000000;
@@ -328,6 +328,11 @@ h6 {
 
 @media (min-width: 768px) {
 
+  .nav-bar,
+  .nav-bar .navbar {
+    background: #F24754 !important;
+  }
+
   .nav-bar .navbar-brand {
     display: none;
   }
@@ -347,6 +352,9 @@ h6 {
     background: #F24754 !important;
   }
 
+  .nav-bar a.nav-link {
+    padding: 5px;
+  }
 
   .nav-bar .dropdown-menu {
     box-shadow: none;
