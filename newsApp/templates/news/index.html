@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Menakadevi Sundaramoorthy" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart care</title>
+    <link rel="shortcut icon" href="{% static 'news/images/news.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}" />
+    <script src="{% static 'news/js/script.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet" />
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="tb-contact">
+              <p>
+                <i class="fas fa-envelope"></i>info@mail.com
+              </p>
+              <p>
+                <i class="fas fa-phone-alt"></i>+012 345 6789
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="tb-menu">
+              <a href="">About</a>
+              <a href="">Privacy</a>
+              <a href="">Terms</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-2 col-md-2">
+            <div class="b-logo">
+              <div class="header_flex_item" style="justify-content:left" onclick="onLogoClick()">
+                <img src="{% static 'news/images/heart-logo.png' %}" class="logo_animation logo" />
+                <p class="logo">
+                  Heart
+                  <br />
+                  Care
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-4">
+            <div class="b-ads">
+              <a href="#"><img src="{% static 'news/images/ad_banner.png' %}" alt="Ads" /></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4">
+            <div class="b-search">
+              <input type="text" placeholder="Search" />
+              <button><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="container">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+          <a href="#" class="navbar-brand">MENU</a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav mr-auto">
+              <a href="/news/home" class="nav-item nav-link active">Home</a>
+              <a href="/news/contact" class="nav-item nav-link">Contact Us</a>
+            </div>
+            <div class="social ml-auto">
+              <a href="/news/home"><i class="fab fa-twitter"></i></a>
+              <a href="/news/home"><i class="fab fa-facebook-f"></i></a>
+              <a href="/news/home"><i class="fab fa-linkedin-in"></i></a>
+              <a href="/news/home"><i class="fab fa-instagram"></i></a>
+              <a href="/news/home"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main News Start -->
+    <div class="main-news">
+      <div class="container px-4" style="padding-top: 20px; padding-bottom: 50px;">
+        <div class="row gx-5">
+          {% if article_list %}
+            {% for article in article_list %}
+              <div class="p-3 col-lg-4">
+                <div class="mn-img">
+                  <img src="{{ article.urlToImage }}" alt="image not available" />
+                  <div class="mn-title">
+                    <a href="{{ article.url }}">{{ article.title }}</a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <p>No Results.</p>
+          {% endif %}
+        </div>
+      </div>
+      {% if is_paginated or article_list.has_other_pages %}
+        <div class="row justify-content-center">
+          <ul class="pagination">
+            <!-- Index Page Results -->
+            {% if page_obj.has_previous %}
+              <li>
+                <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>&laquo;</span>
+              </li>
+            {% endif %}
+            <!-- End Index Page Results -->
+            {% if article_list.has_previous %}
+              <li>
+                <a href="?page={{ article_list.previous_page_number }}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>&laquo;</span>
+              </li>
+            {% endif %}
+            <!-- Index Page Results -->
+            {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="active">
+                  <span>{{ i }}<span class="sr-only">(current)</span></span>
+                </li>
+              {% else %}
+                <li>
+                  <a href="?page={{ i }}">{{ i }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            <!-- End Index Page Results -->
+            {% for i in article_list.paginator.page_range %}
+              {% if article_list.number == i %}
+                <li class="active">
+                  <span>{{ i }}<span class="sr-only">(current)</span></span>
+                </li>
+              {% else %}
+                <li>
+                  <a href="?page={{ i }}">{{ i }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            <!-- Index Page Results -->
+            {% if page_obj.has_next %}
+              <li>
+                <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>&raquo;</span>
+              </li>
+            {% endif %}
+            <!-- End Index Page Results -->
+            {% if article_list.has_next %}
+              <li>
+                <a href="?page={{ article_list.next_page_number }}">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>&raquo;</span>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">©2024 <a href="https://menakadevisundaramoorthy.com/">Menakadevi Sundaramoorthy</a></span>
+      </div>
+    </footer>
+    <!-- Main News End -->
+  </body>
+</html>
