@@ -27,13 +27,12 @@ SECRET_KEY = 'jbsvw5wrz#tp5-7nye7$7s*sf6y@_!v&9kd3zzph_htg#9p-v-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['heart-care-news.netlify.app','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'requests',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newsApp',
+    'requests',
 ]
 
 MIDDLEWARE = [
