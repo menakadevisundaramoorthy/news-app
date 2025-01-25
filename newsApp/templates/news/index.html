@@ -198,9 +198,14 @@
 
     <footer class="footer">
       <div class="container text-center">
-        <span class="text-muted">©2024 <a href="https://menakadevisundaramoorthy.com/">Menakadevi Sundaramoorthy</a></span>
+        <span class="text-muted">
+          ©<span id="year"></span>
+          <a href="https://menakadevisundaramoorthy.com/">Menakadevi Sundaramoorthy</a></span>
       </div>
     </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
     <!-- Main News End -->
   </body>
 </html>
